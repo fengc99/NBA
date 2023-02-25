@@ -1,0 +1,41 @@
+clear all
+//open the dataset
+cd "D:\【Bocconi】\Econometrics\Group1\"
+use nbasal.dta
+
+
+**(1)
+sum marr wage exper age coll games minutes guard forward center points rebounds assists draft allstar avgmin lwage european children
+
+**or you can use these commands to export the description
+estpost tabstat  marr wage exper age coll games minutes guard forward center points rebounds assists draft allstar avgmin lwage european children,statistics (count mean sd min max) columns (statistics)
+esttab using "des.rtf", c("count mean(fmt(3)) sd (fmt(3)) min(fmt(3)) max(fmt(3))")  replace
+
+
+**(2)
+reg wage age exper coll games points assists allstar european children marr
+
+
+**(3)
+gen exper2=exper^2
+
+**(a)
+reg wage age exper2 exper coll games points assists allstar european children marr
+
+**(b) //use the algebra, no commands needed
+
+**(c)
+nlcom _b[exper] + 2*_b[exper2]*6
+
+**(4)
+gen european_points=european*points
+reg wage european_points age exper coll games points assists allstar european children marr
+
+**(5)
+**(a)
+reg wage age exper coll games points assists allstar european children marr
+predict wagehat, xb
+sum wagehat //the range is the min and max value of wagehat
+
+**(b)
+nlcom _b[marr]*1 + _b[children]*1 + _b[allstar]*1 + _b[european] * 1 + _b[age] * 27 + _b[exper] *5 + _b[coll] * 3 + _b[games] *65  + _b[points]*10+ _b[assists]*3 + _b[_cons], nohead 
