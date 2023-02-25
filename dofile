@@ -5,7 +5,7 @@ use nbasal.dta
 
 
 **(1)
-sum marr wage exper age coll games minutes guard forward center points rebounds assists draft allstar avgmin lwage european children
+sum
 
 **or you can use these commands to export the description
 estpost tabstat  marr wage exper age coll games minutes guard forward center points rebounds assists draft allstar avgmin lwage european children,statistics (count mean sd min max) columns (statistics)
