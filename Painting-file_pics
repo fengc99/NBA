@@ -1,0 +1,13 @@
+def compute_dir_HSV(root_path):
+
+  I_pathHSV = []
+  cls_dir = os.listdir(root_path)
+  img_path_list = [os.path.join (root_path, cls_dir[X]) for x in range(len(cls_dir))]
+
+  avg_Slist,avg_Vlist = [], []
+  for img_path in img_path_list:
+    avg_H,avg_S,avg_V = compute_HSV(img_path)
+    I_pathHSV.append([img_path,avg_S, avg_V])
+    avg_Slist.append(avg_S)
+    avg_Vlist.append(avg_V)
+  return I_pathHSV, avg_Slist, avg_Vlist
