@@ -1,0 +1,17 @@
+##if you do not install opencv packages please install opencv firstly ##
+#your parth>pip isntall opencv-pyhthon opencv-contrib-python
+
+
+def compute_HSV(img_path):
+
+  image = cv2.imread(img_path)
+  hsv = c2cvtColor(image, cv2.COLOR_RGB2HSV)
+  H, S, V = cv2.split(hsv)
+
+## value
+v= V.ravel()[np.flatnonzero(V)]
+average_v = sum(v)/len(v)
+
+##  saturation
+s = S.ravel()[np.flatnonzero(S)]
+average_s = sum(s)/len(s)
